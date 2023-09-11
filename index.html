@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Mwit Birth Stat Calculator</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="maincontainer">
+        <h1>Mwit Birth Stat Calculator</h1>
+        <p>Enter your mweors' levels, points, and heritage points and click 'Calculate Stats!' to see how many stats their mwit will be born with. Keep in mind mwit stats are calculated at birth, so if you continue to spar the parents during the pregnancy, the mwit could be born with more points than what was calculated here! A mweor's level and points can be found on its 'Sparring Info' page, and heritage points can be found in the lineage tab.</p>
+            <div id="mweorcontainer">
+                <div class="mweorbox">
+                    <h1>Mweor 1</h1>
+                    <p><label for="mweor1">Mweor's Level:</label>
+                    <input type="number" name="mweor1" id="mweor1level" min="0" max="999" value="0"></p>
+                    <p><label for="mweor1">Mweor's Heritage Points:</label></p>
+                    <p><input type="number" name="mweor1" id="mweor1heritage" min="0" max="9999999999" value="0"></p>
+                    <p><label for="mweor1">Mweor's Points:</label></p>
+                    <p><input type="number" name="mweor1" id="mweor1points" min="0" max="9999999999" value="0"></p>
+                    <p><button id="mweor1clear" class="clear">Clear</button></p>
+                </div>
+                <p><button id="calculate">Calculate <br>Stats!</button></p>
+                <div class="mweorbox">
+                    <h1>Mweor 2</h1>
+                    <p><label for="mweor2">Mweor's Level:</label>
+                    <input type="number" name="mweor2" id="mweor2level" min="0" max="999" value="0"></p>
+                    <p><label for="mweor2">Mweor's Heritage Points:</label></p>
+                    <p><input type="number" name="mweor2" id="mweor2heritage" min="0" max="9999999999" value="0"></p>
+                    <p><label for="mweor2">Mweor's Points:</label></p>
+                    <p><input type="number" name="mweor2" id="mweor2points" min="0" max="9999999999" value="0"></p>
+                    <p><button id="mweor2clear" class="clear">Clear</button></p>
+                </div>
+            </div>
+            <div id="results"></div>
+        </div>
+    </body>
+    <script src="script.js"></script>
+</html>

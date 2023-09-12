@@ -20,7 +20,8 @@ let buttons = {
 
 let misc = {
     pointAverage: null,
-    mwitStats: null
+    mwitStats: null,
+    mwitHeritage: null
 }
 
 buttons.calculate.addEventListener('click', function () {
@@ -29,7 +30,6 @@ buttons.calculate.addEventListener('click', function () {
     if (mweor1.valid) { 
         checkLevels(mweor2);
     }
-    console.log(mweor1);
     if (mweor1.valid && mweor2.valid) {
         checkPoints(mweor1);
         checkPoints(mweor2);
@@ -39,7 +39,8 @@ buttons.calculate.addEventListener('click', function () {
     if (mweor1.valid && mweor2.valid) {
         calcAverage();
         mwitStats();
-        document.getElementById("results").textContent = `Your mwit will be born with ${misc.mwitStats} stats`;
+        document.getElementById("statResults").textContent = `Your mwit will be born with ${misc.mwitStats} stats`;
+        document.getElementById("heritageResults").textContent = `It will also have ${misc.mwitHeritage} heritage points`;
     }
 })
 
@@ -74,11 +75,11 @@ buttons.mweor2clear.addEventListener('click', clearMweor2);
 //make sure the given levels are valid for a mweor (0-20)
 function checkLevels(mweor) {
     if (mweor.level < 0 || mweor.level > 20) {
-        document.getElementById("results").textContent = "Please make sure your mweors' levels are a value from 0 to 20"
+        document.getElementById("statResults").textContent = "Please make sure your mweors' levels are a value from 0 to 20"
         mweor.valid = false;
         return;
     } else {
-        document.getElementById("results").textContent = ""
+        document.getElementById("statResults").textContent = ""
         mweor.valid = true;
     }
 }
@@ -86,23 +87,23 @@ function checkLevels(mweor) {
 //make sure the amount of points is valid given the mweor's level
 function checkPoints(mweor) {
     if (mweor.points < 0) {
-        document.getElementById("results").textContent = "Please make sure the mweors' points are positive numbers"
+        document.getElementById("statResults").textContent = "Please make sure the mweors' points are positive numbers"
         mweor.valid = false;
         return;
     } else if (mweor.level == 0 && mweor.points > 499) {
-        document.getElementById("results").textContent = "Please double check your mweors' points"
+        document.getElementById("statResults").textContent = "Please double check your mweors' points"
         mweor.valid = false;
         return;
     } else if (mweor.level == 19 && mweor.points > 2499999) {
-        document.getElementById("results").textContent = "Please double check your mweors' points"
+        document.getElementById("statResults").textContent = "Please double check your mweors' points"
         mweor.valid = false;
         return;
     } else if (mweor.level == 18 && mweor.points > 999999) {
-        document.getElementById("results").textContent = "Please double check your mweors' points"
+        document.getElementById("statResults").textContent = "Please double check your mweors' points"
         mweor.valid = false;
         return;
     } else if (mweor.level > 0 && mweor.level < 18 && mweor.points > mweor.level * mweor.level * 1000 - 1) {
-        document.getElementById("results").textContent = "Please double check your mweors' points"
+        document.getElementById("statResults").textContent = "Please double check your mweors' points"
         mweor.valid = false;
     } else {
         mweor.valid = true;

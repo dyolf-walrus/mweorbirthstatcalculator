@@ -12,27 +12,35 @@
             <div id="mweorcontainer">
                 <div class="mweorbox">
                     <h1>Mweor 1</h1>
-                    <p><label for="mweor1">Mweor's Level:</label>
+                    <p><label for="mweor1level">Mweor's Level:</label></p>
                     <input type="number" name="mweor1" id="mweor1level" min="0" max="999" value="0"></p>
-                    <p><label for="mweor1">Mweor's Heritage Points:</label></p>
+                    <p><label for="mweor1heritage">Mweor's Heritage Points:</label></p>
                     <p><input type="number" name="mweor1" id="mweor1heritage" min="0" max="9999999999" value="0"></p>
-                    <p><label for="mweor1">Mweor's Points:</label></p>
+                    <p><label for="mweor1points">Mweor's Points:</label></p>
                     <p><input type="number" name="mweor1" id="mweor1points" min="0" max="9999999999" value="0"></p>
+                    <p><label for="mweor1sound">Mweor's Soundness:</label></p>
+                    <p><input type="number" name="mweor1" id="mweor1sound" min="0" max="999" value="0">%</p>
                     <p><button id="mweor1clear" class="clear">Clear</button></p>
                 </div>
                 <p><button id="calculate">Calculate <br>Stats!</button></p>
                 <div class="mweorbox">
                     <h1>Mweor 2</h1>
-                    <p><label for="mweor2">Mweor's Level:</label>
+                    <p><label for="mweor2">Mweor's Level:</label></p>
                     <input type="number" name="mweor2" id="mweor2level" min="0" max="999" value="0"></p>
                     <p><label for="mweor2">Mweor's Heritage Points:</label></p>
                     <p><input type="number" name="mweor2" id="mweor2heritage" min="0" max="9999999999" value="0"></p>
                     <p><label for="mweor2">Mweor's Points:</label></p>
                     <p><input type="number" name="mweor2" id="mweor2points" min="0" max="9999999999" value="0"></p>
+                    <p><label for="mweor2sound">Mweor's Soundness:</label></p>
+                    <p><input type="number" name="mweor2" id="mweor2sound" min="0" max="999" value="0">%</p>
                     <p><button id="mweor2clear" class="clear">Clear</button></p>
                 </div>
             </div>
-            <div id="results"></div>
+            <div id="resultsContainer">
+            <div id="statResults"></div>
+            <div id="heritageResults"></div>
+            <div id="snResults"></div>
+            </div>
         </div>
     </body>
     <script src="script.js"></script>

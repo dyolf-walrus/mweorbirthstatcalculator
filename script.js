@@ -48,9 +48,12 @@ buttons.calculate.addEventListener('click', function () {
         calcHeritage();
         document.getElementById("statResults").textContent = `Your mwit will be born with ${misc.mwitStats} stats`;
         document.getElementById("heritageResults").textContent = `It will also have ${misc.mwitHeritage} heritage points`;
-        if (misc.mwitSoundMin && misc.mwitSoundMax) {
-            document.getElementById("snResults").textContent = `Its soundness can range from ${misc.mwitSoundMin} to ${misc.mwitSoundMax}`;
         }
+    validateSoundness(mweor1);
+    validateSoundness(mweor2);
+    if (mweor1.soundness >= 0 && mweor1.soundness <= 100 && mweor2.soundness >= 0 && mweor2.soundness <=100 ) {
+        calcSound();
+        document.getElementById("snResults").textContent = `Its soundness can range from ${misc.mwitSoundMin} to ${misc.mwitSoundMax}`;
     }
 })
 
@@ -62,6 +65,8 @@ function updateInfo() {
     mweor2.heritage = parseInt(document.getElementById("mweor2heritage").value);
     mweor1.points = parseInt(document.getElementById("mweor1points").value);
     mweor2.points = parseInt(document.getElementById("mweor2points").value);
+    mweor1.soundness = parseInt(document.getElementById("mweor1sound").value);
+    mweor2.soundness = parseInt(document.getElementById("mweor2sound").value);
 }
 
 //clear button for mweor 1
@@ -69,6 +74,7 @@ function clearMweor1() {
     document.getElementById("mweor1level").value = 0;
     document.getElementById("mweor1heritage").value = 0;
     document.getElementById("mweor1points").value = 0;
+    document.getElementById("mweor1sound").value = "";
 }
 
 buttons.mweor1clear.addEventListener('click', clearMweor1);
@@ -78,14 +84,16 @@ function clearMweor2() {
     document.getElementById("mweor2level").value = 0;
     document.getElementById("mweor2heritage").value = 0;
     document.getElementById("mweor2points").value = 0;
+    document.getElementById("mweor2sound").value = "";
 }
 
 buttons.mweor2clear.addEventListener('click', clearMweor2);
 
 //make sure the given levels are valid for a mweor (0-20)
 function checkLevels(mweor) {
-    if (mweor.level < 0 || mweor.level > 20) {
+    if (mweor.level < 0 || mweor.level > 20 || isNaN(mweor.level)) {
         document.getElementById("statResults").textContent = "Please make sure your mweors' levels are a value from 0 to 20"
+        document.getElementById("heritageResults").textContent = "";
         mweor.valid = false;
         return;
     } else {
@@ -277,7 +285,7 @@ function mwitStats() {
 
 //make sure the mweors' heritage points are positive numbers
 function validateHeritage(mweor) {
-    if (mweor.heritage < 0) {
+    if (mweor.heritage < 0 || isNaN(mweor.heritage)) {
         document.getElementById("heritageResults").textContent = "Please make sure your mweors' heritage points are positive numbers"
         mweor.valid = false;
     }
@@ -286,4 +294,31 @@ function validateHeritage(mweor) {
 //calculate the heritage points
 function calcHeritage() {
     misc.mwitHeritage = Math.round((mweor1.level + mweor1.heritage + mweor1.points + mweor2.level + mweor2.heritage + mweor2.points) * 0.05);
+}
+
+//make sure the mweors' soundness are between 0 and 100
+function validateSoundness(mweor) {
+    if (mweor.soundness < 0 || mweor.soundness > 100) {
+        document.getElementById("snResults").textContent = "Please make sure your mweors' soundnesses are values from 0 to 100";
+        mweor.valid = false;
+    } else {
+        document.getElementById("snResults").textContent = "";
+    }
+}
+
+//calculate mwit's min and max soundness
+function calcSound() {
+    let range = [mweor1.soundness, mweor2.soundness]
+    function compareNumbers(a, b) {
+        return a - b;
+      }
+    range.sort(compareNumbers);
+    misc.mwitSoundMin = range[0] - 5;
+    if (misc.mwitSoundMin < 0) {
+        misc.mwitSoundMin = 0;
+    }
+    misc.mwitSoundMax = range[1] + 5;
+    if (misc.mwitSoundMax > 100) {
+        misc.mwitSoundMax = 100;
+    }
 }

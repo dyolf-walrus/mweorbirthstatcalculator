@@ -2,6 +2,7 @@ let mweor1 = {
     level: null,
     heritage: null,
     points: null,
+    soundness: null,
     valid: false
 }
 
@@ -9,6 +10,7 @@ let mweor2 = {
     level: null,
     heritage: null,
     points: null,
+    soundness: null,
     valid: false
 }
 
@@ -21,7 +23,9 @@ let buttons = {
 let misc = {
     pointAverage: null,
     mwitStats: null,
-    mwitHeritage: null
+    mwitHeritage: null,
+    mwitSoundMin: null,
+    mwitSoundMax: null
 }
 
 buttons.calculate.addEventListener('click', function () {
@@ -36,11 +40,17 @@ buttons.calculate.addEventListener('click', function () {
     }
     levelToPoints(mweor1);
     levelToPoints(mweor2);
+    validateHeritage(mweor1);
+    validateHeritage(mweor2);
     if (mweor1.valid && mweor2.valid) {
         calcAverage();
         mwitStats();
+        calcHeritage();
         document.getElementById("statResults").textContent = `Your mwit will be born with ${misc.mwitStats} stats`;
         document.getElementById("heritageResults").textContent = `It will also have ${misc.mwitHeritage} heritage points`;
+        if (misc.mwitSoundMin && misc.mwitSoundMax) {
+            document.getElementById("snResults").textContent = `Its soundness can range from ${misc.mwitSoundMin} to ${misc.mwitSoundMax}`;
+        }
     }
 })
 
@@ -263,4 +273,17 @@ function mwitStats() {
             misc.mwitStats = 27
             return;
     }
+}
+
+//make sure the mweors' heritage points are positive numbers
+function validateHeritage(mweor) {
+    if (mweor.heritage < 0) {
+        document.getElementById("heritageResults").textContent = "Please make sure your mweors' heritage points are positive numbers"
+        mweor.valid = false;
+    }
+}
+
+//calculate the heritage points
+function calcHeritage() {
+    misc.mwitHeritage = Math.round((mweor1.level + mweor1.heritage + mweor1.points + mweor2.level + mweor2.heritage + mweor2.points) * 0.05);
 }
